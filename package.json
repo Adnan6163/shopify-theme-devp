@@ -1,0 +1,36 @@
+{
+  "name": "theme-dev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx mix --mix-config=webpack.mix.cjs",
+    "watch": "npx mix watch --mix-config=webpack.mix.cjs",
+    "prod": "npx mix --production --mix-config=webpack.mix.cjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adnan6163/shopify-theme-devp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Adnan6163/shopify-theme-devp/issues"
+  },
+  "homepage": "https://github.com/Adnan6163/shopify-theme-devp#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.27",
+    "laravel-mix": "^6.0.49",
+    "postcss": "^8.5.6",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.97.3",
+    "sass-loader": "^12.1.0",
+    "tailwindcss": "^3.4.19"
+  },
+  "dependencies": {
+    "alpinejs": "^3.15.8"
+  }
+}

@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header {
+    display: grid;
+    /* Define 4 columns to match the 4 areas listed below */
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-areas: "header-logo header-nav header-nav header-icon";
+    
+    .header__logo {
+        grid-area: header-logo;
+    }
+    .header__menu {
+        grid-area: header-nav;
+    }
+    .header__icon {
+        grid-area: header-icon;
+    }
+
+    @media (max-width: 768px) {
+        /* Adjusted to 3 columns to match the 3 areas below */
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas: "header-nav header-logo header-icon";
+    }
+
+    .nav__item{
+        &:hover {
+            .nav__item-submenu {
+                display: block;
+            }
+        }
+        .nav__item-submenu{
+            display: none;
+        }
+    }
+}
+
+[x-cloak] { 
+    display: none !important; 
+}
