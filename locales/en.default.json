@@ -49,9 +49,14 @@
       "reset": "Clear search term"
     },
     "cart": {
-      "view": "View cart ({{ count }})",
-      "view_empty_cart": "View cart",
-      "item_added": "Item added to your cart"
+      "title": "Your cart",
+      "continue_shopping": "Continue shopping",
+      "cart_empty_title_html": "Your cart is Empty ",
+      "subtotal": "Subtotal:",
+      "checkout": "Checkout",
+      "saving": "Total Savings:",
+      "view": "View my cart ({{ count }})",
+      "item_added": "Item added to your cart",
     },
     "share": {
       "close": "Close share",

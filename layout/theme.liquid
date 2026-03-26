@@ -287,16 +287,16 @@ body {
   font-style: var(--font-body-style);
   font-weight: var(--font-body-weight);
 }
-      .header__hamburger {
-        display: none;
-      }
+.header__hamburger {
+  display: none;
+}
 
-      @media screen and (max-width: 768px) {
-        .header__hamburger {
-          display: block;
-        }
-      }
-    {% endstyle %}
+@media screen and (max-width: 768px) {
+  .header__hamburger {
+    display: block;
+  }
+}
+  {% endstyle %}
 
     {% comment %} {{ 'base.css' | asset_url | stylesheet_tag }} {% endcomment %}
     {{ 'app.css' | asset_url | stylesheet_tag }}
@@ -359,14 +359,14 @@ body {
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button sr-only" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
-    </a>
+  </a>
 
-    {%- if settings.cart_type == 'drawer' -%}
-      {%- render 'cart-drawer' -%}
-    {%- endif -%}
+    {% comment %} {%- if settings.cart_type == 'drawer' -%}
+            {%- render 'cart-drawer-2' -%}
+        {%- endif -%} {% endcomment %}
 
     {% sections 'header-group' %}
-
+    {%- render 'cart-drawer-2' -%}
     <main
       id="MainContent"
       class="content-for-layout focus-none"
