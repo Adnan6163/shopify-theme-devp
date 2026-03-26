@@ -13,29 +13,38 @@
 <div x-data="
     {
     qty: 1,
-    addToCart(){
+    // Inside your Alpine.js component
+addToCart() {
+let formData = new FormData($refs.product_form);
+  this.loading = true; // Optional: show a spinner
 
-    let formData = new FormData($refs.product_form);
+  fetch(window.Shopify.routes.root + 'cart/add.js', {
+    method: 'POST',
+    headers: { 'X-Requested-With': 'XMLHttpRequest' },
+    body: formData
+  })
+  .then(response => {
+    if (!response.ok) throw new Error('Failed to add');
+    return response.json();
+  })
+  .then(async (cartItem) => {
+    // 1. Dispatch the update and WAIT for it 
+    // We pass the new item data so the cart can update instantly
+    await this.$dispatch('update-cart', { item: cartItem });
 
-    fetch(window.Shopify.routes.root + 'cart/add.js', {
-      method: 'POST',
-      headers: {
-          'X-Requested-With': 'XMLHttpRequest' // This prevents the 401 error
-        },
-      body: formData
-    })
-    .then(response => {
-      return response.json();
-    }).then(response => {
-      this.$dispatch('update-cart');
+    // 2. Add a tiny delay to ensure the DOM has rendered the new item
+    // before the drawer animation starts
+    setTimeout(() => {
       this.$dispatch('toggle-cart');
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-    }
-    }
-  ">
+      this.loading = false;
+    }, 100); 
+  })
+  .catch(error => {
+    console.error('Cart Error:', error);
+    this.loading = false;
+  });
+}
+    }">
   {%- if product != blank -%}
     {%- liquid
       assign gift_card_recipient_feature_active = false
@@ -84,7 +93,7 @@
         -%}
         <button
           type="button"
-          @click="addToCart()"
+          @click.prevent="addToCart"
           name="add"
           class="product-form__submit button__primary w-full">
           <span>
