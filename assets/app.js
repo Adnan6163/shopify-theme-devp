@@ -3565,6 +3565,28 @@ __webpack_require__.r(__webpack_exports__);
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
+var codeinspire = {
+  updateQuantity: function updateQuantity(line, qty) {
+    fetch('/cart/change.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        quantity: qty,
+        line: line
+      })
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      // fire javascript event on window
+      window.dispatchEvent(new Event('update-cart'));
+    })["catch"](function (error) {
+      console.error('Error:', error);
+    });
+  }
+};
+window.codeinspire = codeinspire;
 
 /***/ }
 

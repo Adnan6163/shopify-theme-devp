@@ -1,34 +1,36 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div
   class="fixed inset-0 overflow-hidden z-20"
-  x-data="{ 
-  cartDrawer: false,
-  updateCart() {
-    fetch('/?view=cart')
-    .then(response => response.text())
-    .then(cartData => {
-      $refs.cartDrawer.innerHTML = cartData;
-    })
-  }
-    
-  }"
+  x-data="
+    {
+    cartDrawer: false,
+    updateCart() {
+      fetch('/?view=cart')
+      .then(response => response.text())
+      .then(cartData => {
+        $refs.cartDrawer.innerHTML = cartData;
+      })
+    }
+
+    }
+  "
   x-show="cartDrawer"
   x-cloak
   @toggle-cart.window="cartDrawer = !cartDrawer"
   @update-cart.window="updateCart"
   aria-labelledby="slide-over-title"
   role="dialog"
-  aria-modal="true">
+  aria-modal="true"
+>
   <div class="absolute inset-0 overflow-hidden">
-
     <div
       class="absolute inset-0 bg-gray-500 bg-opacity-75"
       x-show="cartDrawer"
       x-transition.opacity
       @click="cartDrawer = false"
-      aria-hidden="true"></div>
+      aria-hidden="true"
+    ></div>
     <div class="fixed inset-y-0 right-0 max-w-full flex">
-
       <div
         class="relative w-screen max-w-xs md:max-w-md"
         x-show="cartDrawer"
@@ -37,12 +39,14 @@
         x-transition:enter-end="translate-x-0 opacity-100"
         x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
         x-transition:leave-start="translate-x-0"
-        x-transition:leave-end="translate-x-full opacity-0">
+        x-transition:leave-end="translate-x-full opacity-0"
+      >
         <div class="absolute top-0 left-0 -ml-8 pt-4 pr-2 flex sm:-ml-10 sm:pr-4">
           <button
             type="button"
             @click="cartDrawer = false"
-            class="rounded-md text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
+            class="rounded-md text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
+          >
             <span class="sr-only">Close panel</span>
             <!-- Heroicon name: outline/x -->
             <svg
@@ -51,7 +55,8 @@
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              aria-hidden="true">
+              aria-hidden="true"
+            >
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -63,35 +68,30 @@
 
         <div class="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll" x-ref="cartDrawer">
           {%- render 'cart-form' -%}
-        {% comment %} <div class="px-4 sm:px-6">
-                                                                        cart drawer
-                                                                      </div>
-                                                                      <div class="mt-6 relative flex-1 px-4 sm:px-6">
-                                                                        {%- for item in cart.items -%}
-                                                                          <div class="flex items-start py-4 border-b border-gray-200">
-                                                                            {%- if item.image -%}
-                                                                              <img
-                                                                                src="{{ item.image | image_url: width: 150, height: 150 }}"
-                                                                                alt="{{ item.product_title }}"
-                                                                                width=""
-                                                                                height="">
-                                                                            {%- else -%}
-                                                                              <div class="w-[150px] h-[150px] bg-gray-200 flex items-center justify-center">
-                                                                                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                                                                              </div>
-            
-                                                                            {%- endif -%}
-            
-                                                                            <div class="ml-4 flex-1">
-                                                                              <h3 class="text-sm font-medium text-gray-900">{{ item.product.title }}</h3>
-                                                                              <p class="text-sm text-gray-500">{{ item.variant.title }}</p>
-                                                                              <p class="text-sm font-medium text-gray-900">{{ item.line_price | money }}</p>
-                                                                            </div>
-                                                                          </div>
-            
-                                                                        {%- endfor -%}
-                                                          </div> {% endcomment %}
-
+          {% comment %}
+            <div class="px-4 sm:px-6">
+            cart drawer
+            </div>
+            <div class="mt-6 relative flex-1 px-4 sm:px-6">
+            {%- for item in cart.items -%}
+            <div class="flex items-start py-4 border-b border-gray-200">
+            {%- if item.image -%}
+            <img src="{{ item.image | image_url: width: 150, height: 150 }}" alt="{{ item.product_title }}" width=""
+            height="">
+            {%- else -%}
+            <div class="w-[150px] h-[150px] bg-gray-200 flex items-center justify-center">
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+            {%- endif -%}
+            <div class="ml-4 flex-1">
+            <h3 class="text-sm font-medium text-gray-900">{{ item.product.title }}</h3>
+            <p class="text-sm text-gray-500">{{ item.variant.title }}</p>
+            <p class="text-sm font-medium text-gray-900">{{ item.line_price | money }}</p>
+            </div>
+            </div>
+            {%- endfor -%}
+            </div>
+          {% endcomment %}
         </div>
       </div>
     </div>
