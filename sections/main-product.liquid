@@ -69,10 +69,7 @@
                 </div>
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                  {%- render '_price-element',
-                    product: product,
-                    {{ class: 'text-lg font-bold' }}
-                  -%}
+                  {%- render '_price-element', product: product, class: 'text-lg font-bold' -%}
                 </div>
                 {%- if product.quantity_price_breaks_configured? -%}
                   <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
@@ -2219,3 +2216,17 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {%- render '_price-element',
+                        product: product,
+                        {{ class: 'text-lg font-bold' }}
+                      -%}
+  to: "{%- render '_price-element', product: product, class: 'text-lg font-bold' -%}"
+  position: 2732..2809
+{% endcomment %}
